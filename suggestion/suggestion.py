@@ -94,7 +94,6 @@ class Suggestion(commands.Cog):
                 "Uh oh, looks like the Admins haven't added the required channel."
             )
         embed = discord.Embed(color=await ctx.embed_colour(), description=suggestion, title="Sugestão #{s_id}")
-        )
         if ctx.message.attachments:
             embed.set_image(url=ctx.message.attachments[0].url)
 
