@@ -93,7 +93,7 @@ class Suggestion(commands.Cog):
             return await ctx.send(
                 "Uh oh, looks like the Admins haven't added the required channel."
             )
-        embed = discord.Embed(color= Color.yellow(), description=suggestion, title=f"Sugestão #{suggest_id}")
+        embed = discord.Embed(color=await ctx.embed_colour(), description=suggestion, title=f"Sugestão #{suggest_id}")
         if is_anonymous:
             footer = [f"Suggested in {ctx.guild.name} ({ctx.guild.id})", ctx.guild.icon_url]
         else:
