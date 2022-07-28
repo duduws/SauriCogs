@@ -93,7 +93,15 @@ class Suggestion(commands.Cog):
             return await ctx.send(
                 "Uh oh, looks like the Admins haven't added the required channel."
             )
-        embed = discord.Embed(color=await ctx.embed_colour(), description=suggestion, title="Sugestão #{s_id}")
+        embed = discord.Embed(color=await ctx.embed_colour(), description=suggestion, title="Sugestão #{suggestion_id}")
+        if is_anonymous:
+            footer = [f"Suggested in {ctx.guild.name} ({ctx.guild.id})", ctx.guild.icon_url]
+        else:
+            footer = [f"Suggested by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", ctx.author.avatar_url]
+        embed.set_footer(
+            text=footer[0],
+            icon_url=footer[1]
+        )
         if ctx.message.attachments:
             embed.set_image(url=ctx.message.attachments[0].url)
 
@@ -107,7 +115,7 @@ class Suggestion(commands.Cog):
             s_id = await self.config.guild(ctx.guild).next_id()
             await self.config.guild(ctx.guild).next_id.set(s_id + 1)
             server = ctx.guild.id
-            content = f""
+            content = f"Suggestion #{s_id}"
         msg = await channel.send(content=content, embed=embed)
 
         up_emoji, down_emoji = await self._get_emojis(ctx)
@@ -572,7 +580,7 @@ class Suggestion(commands.Cog):
             if settings["msg_id"] == 0:
                 return await ctx.send("Uh oh, that suggestion doesn't seem to exist.")
             else:
-                content = f""
+                content = f"Suggestion #{suggestion_id}"
 
         op_info = settings["author"]
         op, op_name, op_discriminator, op_id, op_avatar = await self._get_op_info(
@@ -597,7 +605,7 @@ class Suggestion(commands.Cog):
         if is_anonymous:
             footer = [f"Suggested in {suggested_in_guild.name} ({suggested_in_guild.id})", suggested_in_guild.icon_url]
         else:
-            footer = [f"Suggested by {op_name}#{op_discriminator} ({op_id})", op_avatar]
+            footer = [f"{op_name}#{op_discriminator}", op_avatar]
         embed.set_footer(
             text=footer[0],
             icon_url=footer[1]
