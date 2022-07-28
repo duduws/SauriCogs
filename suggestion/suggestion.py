@@ -580,7 +580,7 @@ class Suggestion(commands.Cog):
             if settings["msg_id"] == 0:
                 return await ctx.send("Uh oh, that suggestion doesn't seem to exist.")
             else:
-                content = f"Suggestion #{suggestion_id}"
+                content = f""
 
         op_info = settings["author"]
         op, op_name, op_discriminator, op_id, op_avatar = await self._get_op_info(
