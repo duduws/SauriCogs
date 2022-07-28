@@ -115,7 +115,7 @@ class Suggestion(commands.Cog):
             s_id = await self.config.guild(ctx.guild).next_id()
             await self.config.guild(ctx.guild).next_id.set(s_id + 1)
             server = ctx.guild.id
-            content = f"Suggestion #{s_id}"
+            content = f""
         msg = await channel.send(content=content, embed=embed)
 
         up_emoji, down_emoji = await self._get_emojis(ctx)
@@ -136,7 +136,7 @@ class Suggestion(commands.Cog):
             await ctx.tick()
         try:
             await ctx.author.send(
-                content="Your suggestion has been sent for approval!", embed=embed
+                content="Sua sugestão foi enviada!", embed=embed
             )
         except discord.Forbidden:
             pass
@@ -580,7 +580,7 @@ class Suggestion(commands.Cog):
             if settings["msg_id"] == 0:
                 return await ctx.send("Uh oh, that suggestion doesn't seem to exist.")
             else:
-                content = f"Suggestion #{suggestion_id}"
+                content = f""
 
         op_info = settings["author"]
         op, op_name, op_discriminator, op_id, op_avatar = await self._get_op_info(
