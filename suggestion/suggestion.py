@@ -635,10 +635,10 @@ class Suggestion(commands.Cog):
     async def _get_emojis(self, ctx):
         up_emoji = self.bot.get_emoji(await self.config.guild(ctx.guild).up_emoji())
         if not up_emoji:
-            up_emoji = "✅"
+            up_emoji = "⬆️"
         down_emoji = self.bot.get_emoji(await self.config.guild(ctx.guild).down_emoji())
         if not down_emoji:
-            down_emoji = "❎"
+            down_emoji = "⬇️"
         return up_emoji, down_emoji
 
     async def _get_op_info(self, ctx, op_info):
